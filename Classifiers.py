@@ -2,6 +2,7 @@
 # OVERVIEW: This file contains implementations of AI algorithms used for classification tasks
 
 import numpy as np
+import pandas as pd
 from tqdm import tqdm
 
 class SimpleNeuralClassifier(object):
@@ -70,9 +71,11 @@ class SimpleNeuralClassifier(object):
 
 		return accuracy / len(data)	# % of classifications correctly answered
 
-	# Store neural network's weights & biases in file for later use
-	def save(self, path):
-		return self.sizes
+	# Store neural network's weights & biases in CSV file
+	def save(self, filename):
+
+		networkInfo = np.hstack((self.weights.flatten(), self.biases.flatten()))
+		np.savetxt(filename, networkInfo, delimiter = ',')
 
 	# Feeds example to neural network and generates prediction/loss
 	def feed(self, example, label):
