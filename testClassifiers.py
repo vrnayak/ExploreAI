@@ -43,7 +43,7 @@ def run_mnist_network(preload, filename = None):
 
 
 if __name__ == '__main__':
-	
+
 	# Important files
 	networkInfo = 'mnistNetworkInfo-784-20-10.csv'
 
