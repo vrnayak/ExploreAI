@@ -2,12 +2,10 @@
 # OVERVIEW: This file contains implementations of AI algorithms used for classification tasks
 
 import numpy as np
-import pandas as pd
 from tqdm import tqdm
 
+# OVERVIEW: Feedforward neural network using MSE loss
 class SimpleNeuralClassifier(object):
-
-	# OVERVIEW: Feedforward neural network using MSE loss
 
 	# Initialize neurons, layers, weights, biases, and hyperparameters
 	def __init__(self, layers = None, eta = 1.0, batchSize = 40, epochs = 30):
