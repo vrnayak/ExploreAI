@@ -77,6 +77,16 @@ class SimpleNeuralClassifier(object):
 		networkInfo = np.hstack((self.weights.flatten(), self.biases.flatten()))
 		np.savetxt(filename, networkInfo, delimiter = ',')
 
+	# Loads weights & biases from CSV file
+	def load(self, filename):
+
+		networkInfo = np.genfromtxt(filename, delimiter = ',', dtype = np.float64)
+		weightInfo = networkInfo[:self.weights.size]
+		biasInfo = networkInfo[self.weights.size:]
+
+		self.weights = weightInfo.reshape(self.weights.shape)
+		self.biases = biasInfo.reshape(self.biases.shape)
+
 	# Feeds example to neural network and generates prediction/loss
 	def feed(self, example, label):
 
