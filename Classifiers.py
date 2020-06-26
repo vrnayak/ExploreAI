@@ -38,7 +38,7 @@ class SimpleNeuralClassifier(object):
 	# Trains neural network on list of labelled examples
 	def train(self, data):
 
-		for epoch in tqdm(range(self.epochs)):
+		for epoch in range(self.epochs):
 
 			accuracy = 0
 			np.random.shuffle(data)
@@ -73,14 +73,19 @@ class SimpleNeuralClassifier(object):
 	def save(self, filename):
 
 		networkInfo = np.hstack((self.weights.flatten(), self.biases.flatten()))
+		hyperParams = np.array([self.eta, self.batchSize, self.epochs])
+		networkInfo = np.hstack((hyperParams, networkInfo))
 		np.savetxt(filename, networkInfo, delimiter = ',')
 
 	# Loads weights & biases from CSV file
 	def load(self, filename):
 
 		networkInfo = np.genfromtxt(filename, delimiter = ',', dtype = np.float64)
-		weightInfo = networkInfo[:self.weights.size]
-		biasInfo = networkInfo[self.weights.size:]
+		self.eta = networkInfo[0]
+		self.batchSize = networkInfo[1]
+		self.epochs = networkInfo[2]
+		weightInfo = networkInfo[3:self.weights.size + 3]
+		biasInfo = networkInfo[self.weights.size + 3:]
 
 		self.weights = weightInfo.reshape(self.weights.shape)
 		self.biases = biasInfo.reshape(self.biases.shape)
