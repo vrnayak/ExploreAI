@@ -1,8 +1,7 @@
 # Classifiers.py
-# OVERVIEW: This file contains implementations of AI algorithms used for classification tasks
+# OVERVIEW: Contains implementations of AI algorithms used for classification tasks
 
 import numpy as np
-from tqdm import tqdm
 
 # OVERVIEW: Feedforward neural network using MSE loss
 class SimpleNeuralClassifier(object):
