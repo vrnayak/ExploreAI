@@ -49,7 +49,7 @@ class SimpleNeuralClassifier(object):
 				for example in minibatch:
 
 					label = example[-1]
-					pred, cost = self.feed(example[:-1], label)
+					pred, _ = self.feed(example[:-1], label)
 					accuracy += 1 if pred == label else 0
 					self.compute_gradient(label)
 
@@ -63,7 +63,7 @@ class SimpleNeuralClassifier(object):
 
 		accuracy = 0
 		for example in data:
-			pred, cost = self.feed(example[:-1], example[-1])
+			pred, _ = self.feed(example[:-1], example[-1])
 			accuracy += 1 if pred == example[-1] else 0
 
 		return accuracy / len(data)	# % of classifications correctly answered
