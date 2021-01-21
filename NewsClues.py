@@ -96,7 +96,6 @@ class NewsClues:
 						  	if pd.to_datetime(day.string) == date]
 
 			pageNum += 1
-			identifier = 2
 
 		return headlines
 

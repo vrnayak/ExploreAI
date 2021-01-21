@@ -19,7 +19,7 @@ def load_mnist_data(imgPath, lblPath):
 # If preload is True, weights & biases are preloaded instead of trained
 def run_mnist_network(preload, filename = None):
 
-	nn = SimpleNeuralClassifier(layers = [784, 25, 10], eta = 3.0, batchSize = 40, epochs = 30)
+	nn = SimpleNeuralClassifier(layers = [784, 25, 10], eta = 3.0, batchSize = 40, epochs = 30, verbose = True)
 
 	if preload is True:
 		nn.load(filename)
@@ -49,4 +49,4 @@ if __name__ == '__main__':
 
 	# Train & test neural network to classify handwritten digits from MNIST Database
 	#run_mnist_network(True, networkInfo)
-	run_mnist_network(False)
+	run_mnist_network(preload=False)
