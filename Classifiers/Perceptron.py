@@ -7,46 +7,59 @@ import numpy as np
 class Perceptron(object):
 
   # Initializes normal vector to hyperplane and offset to 0
-  def __init__(self, examples, labels):
+  def __init__(self, dimension, verbose=False, separable=False, loss_function='0-1'):
 
     # Initialize hyperplane parameters
     self.offset = 0.0
-    self.theta = np.zeros(len(examples[0]))
+    self.theta = np.zeros(dimension)
 
-    # Initialize dataset
-    self.size = len(examples)
-    self.labels = np.array(labels)
-    self.datapoints = np.array(examples)
-    #print(self.datapoints)
+    # Initialize dataset variables
+    self.numDataPoints = 0
+    self.labels = np.array([])
+    self.datapoints = np.array([])
+    
+    # Initialize other parameters 
+    self.verbose = verbose
+    self.separable = separable  # whether data is linearly separable
+    self.loss_function = loss_function 
+
   # Train algorithm to learn a decision boundary
-  def train(self):
+  def train(self, datapoints, labels):
 
-    while not self.converged():
+    # Create numpy arrays using parameters
+    self.labels = labels
+    self.numDataPoints = self.labels.shape[0]
+    self.datapoints = datapoints
 
-      for point in range(self.size):
-        if not self.classify(point):
+    # Actual perceptron algorithm
+    while not self.hasConverged():
+
+      for point in range(self.numDataPoints):
+        if self.misclassified(point):
           self.theta += (self.labels[point] * self.datapoints[point])
           self.offset += self.labels[point]
-          point += 1
 
-    print(self.theta)
-    print(self.offset)
+    return self.theta, self.offset
   
+  # Determine whether current hyperplane misclassifies data point
+  def misclassified(self, point):
 
-  def classify(self, point):
-    actual = self.labels[point]
     predicted = 1
-    #print(self.datapoints[point])
+    actual = self.labels[point]
     if (np.dot(self.theta, self.datapoints[point]) + self.offset <= 0):
       predicted = -1
-    return actual == predicted
+    return actual != predicted
 
   
-  # Checks if any points are misclassified
-  def converged(self):
+  # Checks convergence condition based on loss function
+  def hasConverged(self):
+  
+    if self.loss_function == '0-1':
+      return self.zeroOneLoss() == 0
 
-    for i in range(self.size):
-      if not self.classify(i):
-        return False
-    
-    return True
+  # 0-1 Loss Function
+  def zeroOneLoss(self):
+
+    results = self.labels * (np.dot(self.datapoints, self.theta) + self.offset)
+    totalLoss = results[results <= 0].shape[0] / self.numDataPoints
+    return totalLoss
