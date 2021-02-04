@@ -6,15 +6,16 @@ with open("README.md", "r", encoding="utf-8") as readme:
   long_description = readme.read()
 
 setuptools.setup(
-  name="ExploreAI-vrnayak",
+  name="exploreAI",
   version="0.0.1",
   author="Vishal Nayak",
   author_email="vrnayak@umich.edu",
-  description="A package of AI algorithms"
+  description="A package of AI algorithms",
   long_description=long_description,
   long_description_content_type="text/markdown",
   url="https://github.com/vrnayak/ExploreAI",
-  packages=setuptools.find_packages(),
+  packages=['Classifiers'],
+  include_package_data=True,
   classifiers=[
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

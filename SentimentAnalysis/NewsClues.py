@@ -10,7 +10,7 @@ import pandas as pd
 import datetime as dt
 from bs4 import BeautifulSoup
 
-
+# A Python web scraper that gathers headlines from news outlets
 class NewsClues:
 
 	def __init__(self, start = '01/01/2020', end = str(dt.date.today())):

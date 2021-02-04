@@ -3,7 +3,7 @@
 
 import numpy as np
 import idx2numpy as idx
-from Classifiers import SimpleNeuralClassifier
+from Classifiers.FFNeuralNetwork import FFNeuralNetwork
 
 # Loads images & labels from MNIST Database
 def load_mnist_data(imgPath, lblPath):
@@ -19,14 +19,14 @@ def load_mnist_data(imgPath, lblPath):
 # If preload is True, weights & biases are preloaded instead of trained
 def run_mnist_network(preload, filename = None):
 
-	nn = SimpleNeuralClassifier(layers = [784, 25, 10], eta = 3.0, batchSize = 40, epochs = 30, verbose = True)
+	nn = FFNeuralNetwork(layers = [784, 25, 10], eta = 3.0, batchSize = 40, epochs = 30, verbose = True)
 
 	if preload is True:
 		nn.load(filename)
 		print('Weights & biases have successfully been loaded from file.')
 	else:
-		mnistTrainingSet = 'Datasets/mnistTrainingImgs-60k-idx1-ubyte'
-		mnistTrainingLbls = 'Datasets/mnistTrainingLbls-60k-idx1-ubyte'
+		mnistTrainingSet = 'DigitClassification/Datasets/mnistTrainingImgs-60k-idx1-ubyte'
+		mnistTrainingLbls = 'DigitClassification/Datasets/mnistTrainingLbls-60k-idx1-ubyte'
 		trainingData = load_mnist_data(mnistTrainingSet, mnistTrainingLbls)
 
 		# Train Neural Network & Save Weights/Biases
@@ -34,8 +34,8 @@ def run_mnist_network(preload, filename = None):
 		nn.save('mnistNN-784-25-10-3-40-30.csv')
 
 	# Test Neural Network
-	mnistTestingSet = 'Datasets/mnistTestingImgs-10k-idx1-ubyte'
-	mnistTestingLbls = 'Datasets/mnistTestingLbls-10k-idx1-ubyte'
+	mnistTestingSet = 'DigitClassification/Datasets/mnistTestingImgs-10k-idx1-ubyte'
+	mnistTestingLbls = 'DigitClassification/Datasets/mnistTestingLbls-10k-idx1-ubyte'
 	testingData = load_mnist_data(mnistTestingSet, mnistTestingLbls)
 
 	accuracy = nn.test(testingData)

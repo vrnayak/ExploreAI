@@ -1,10 +1,11 @@
-# Classifiers.py
-# OVERVIEW: Contains implementations of AI algorithms used for classification tasks
+# FFNeuralNetwork.py
+# OVERVIEW: Implements a feedforward neural network
 
+import csv
 import numpy as np
 
 # OVERVIEW: Feedforward neural network using MSE loss
-class SimpleNeuralClassifier(object):
+class FFNeuralNetwork(object):
 
   # Initialize neurons, layers, weights, biases, and hyperparameters
   def __init__(self, layers = None, eta = 1.0, batchSize = 40, epochs = 30, verbose=False):
@@ -167,10 +168,3 @@ class SimpleNeuralClassifier(object):
     expected = self.vectorize(label)
     actual = self.layers[-1, :self.sizes[-1]]
     return actual - expected
-
-
-# OVERVIEW: Linear binary classifier
-class LinearBinaryClassifier(object):
-
-  def __init__(self, labels,):
-    pass
