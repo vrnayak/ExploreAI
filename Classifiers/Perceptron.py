@@ -31,14 +31,26 @@ class Perceptron(object):
     self.numDataPoints = self.labels.shape[0]
     self.datapoints = datapoints
 
+    if self.verbose:
+      print('Dimensionality: {}'.format(self.datapoints[0].shape[0]))
+      print('Number of Datapoints: {}'.format(self.numDataPoints))
+      
     # Actual perceptron algorithm
+    numUpdates = 0
     while not self.hasConverged():
 
       for point in range(self.numDataPoints):
         if self.misclassified(point):
           self.theta += (self.labels[point] * self.datapoints[point])
           self.offset += self.labels[point]
+          numUpdates += 1
 
+    if self.verbose:
+      print()
+      print('Number of Updates: {}'.format(numUpdates))
+      print('Final Decision Boundary: {}'.format(self.theta))
+      print('Final Offset Value: {}'.format(self.offset))
+      
     return self.theta, self.offset
   
   # Determine whether current hyperplane misclassifies data point
