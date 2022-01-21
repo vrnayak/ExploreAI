@@ -5,7 +5,7 @@ decorator==4.4.2
 -e git+https://github.com/vrnayak/ExploreAI.git@de283b430de8ec16e7a4eb18d6265ab16a11414a#egg=exploreAI
 idx2numpy==1.2.3
 ipykernel==5.4.3
-ipython==7.20.0
+ipython==7.31.1
 ipython-genutils==0.2.0
 jedi==0.18.0
 jupyter-client==6.1.11
